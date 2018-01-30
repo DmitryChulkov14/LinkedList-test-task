@@ -1,12 +1,10 @@
 public class MyLinkedList {
 
     private Node start;
-    private Node end;
     private int size;
 
     public MyLinkedList() {
         start = null;
-        end = null;
         size = 0;
     }
 
@@ -15,31 +13,29 @@ public class MyLinkedList {
     }
 
     public void add(int value) {
-        Node temp = new Node(value,null);
+        Node current = start;
+
+        if(current == null) {
+            start = new Node(value, null);
+        } else {
+            while (current.link != null) {
+                current = current.link;
+            }
+            Node toAppend = new Node(value, null);
+            current.link = toAppend;
+        }
         size++ ;
-        if(start == null)
-        {
-            start = temp;
-            end = start;
-        }
-        else
-        {
-            end.setLink(temp);
-            end = temp;
-        }
     }
 
     public void deleteTail() {
         if (start != null) {
             if(start.link == null) {
                 start = null;
-                end = null;
             } else {
                 Node current = start;
                 while (current.link.link != null)
                     current = current.link;
                 current.link = null;
-                end = current;
             }
             size--;
         }
@@ -52,7 +48,6 @@ public class MyLinkedList {
                 start = start.link;
             } else {
                 start = null;
-                end = null;
             }
             size--;
         }
@@ -71,11 +66,30 @@ public class MyLinkedList {
                 } else {
                     current = current.link;
                 }
-            if (end.value > inputValue) {
-                deleteTail();
             }
+            if (current.link == null) {
+                if (current.value > inputValue) {
+                    deleteTail();
+                    size--;
+                }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        Node current = start;
+        while (current != null) {
+            if (current.link != null) {
+                sb.append(current.value).append(", ");
+            } else {
+                sb.append(current.value);
+            }
+            current = current.link;
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     class Node {
