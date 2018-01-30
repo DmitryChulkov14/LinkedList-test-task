@@ -67,7 +67,7 @@ public class MyLinkedList {
                     current = current.link;
                 }
             }
-            if (current.link == null) {
+            if (current != null && current.link == null) {
                 if (current.value > inputValue) {
                     deleteTail();
                     size--;
