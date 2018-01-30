@@ -21,8 +21,7 @@ public class MyLinkedList {
             while (current.link != null) {
                 current = current.link;
             }
-            Node toAppend = new Node(value, null);
-            current.link = toAppend;
+            current.link = new Node(value, null);
         }
         size++ ;
     }
@@ -42,18 +41,8 @@ public class MyLinkedList {
     }
 
     public void removeElementsGreatThanInputValue(int inputValue) {
-
-        while (start != null && start.value > inputValue) {
-            if (start.link != null) {
-                start = start.link;
-            } else {
-                start = null;
-            }
-            size--;
-        }
-
         if (start != null && start.link != null) {
-            Node current = start.link;
+            Node current = start;
             while (current != null && current.link != null) {
                 if (current.value > inputValue) {
                     if (current.link != null) {
