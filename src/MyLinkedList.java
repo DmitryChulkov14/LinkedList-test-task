@@ -59,8 +59,6 @@ public class MyLinkedList {
                     if (current.link != null) {
                         current.setValue(current.link.value);
                         current.setLink(current.link.link);
-                    } else {
-                        current.setLink(null);
                     }
                     size--;
                 } else {
